@@ -1,6 +1,7 @@
 package br.inatel.labs.labjpa.entity;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -20,17 +21,17 @@ public class NotaCompra
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@OneToMany(mappedBy = "notaCompra")
-	private List<NotaCompraItem> listaNotaCompraItem;
-
-	@ManyToOne
-	private Fornecedor fornecedor;
-
+	
 	@NotNull
 	@Past
 	private LocalDate dataEmissao;
 	
+	@ManyToOne
+	private Fornecedor fornecedor;
+
+	@OneToMany(mappedBy = "notaCompra")
+	private List<NotaCompraItem> listaNotaCompraItem;
+
 	public NotaCompra()
 	{
 		
@@ -86,6 +87,13 @@ public class NotaCompra
 		return Objects.equals(id, other.id);
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "NotaCompra [id=" + id + ", dataEmissao=" + dataEmissao + "]";
+	}
+
 	public BigDecimal getCalculoTotalNota()
 	{
 	   BigDecimal total = this.listaNotaCompraItem.stream()
@@ -93,5 +101,15 @@ public class NotaCompra
 	      .reduce(BigDecimal.ZERO, BigDecimal::add);
 
 	   return total;
+	}
+
+	public List<NotaCompraItem> getListaNotaCompraItem()
+	{
+		return listaNotaCompraItem;
+	}
+	
+	public void setListaNotaCompraItem(List<NotaCompraItem> listaNotaCompraItem)
+	{
+		this.listaNotaCompraItem = listaNotaCompraItem;
 	}
 }
