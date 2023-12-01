@@ -44,6 +44,14 @@ public class Fornecedor
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
 
 	public List<Produto> getListaProduto() {
 		return listaProduto;
@@ -68,6 +76,11 @@ public class Fornecedor
 			return false;
 		Fornecedor other = (Fornecedor) obj;
 		return Objects.equals(id, other.id);
+	}
+	
+	@Override
+	public String toString() {
+		return "Fornecedor [id=" + id + ", razaoSocial=" + razaoSocial + "]";
 	}
 }
 

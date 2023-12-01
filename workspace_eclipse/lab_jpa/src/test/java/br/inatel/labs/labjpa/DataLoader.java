@@ -82,6 +82,8 @@ class DataLoader
 		i2_2 = notaCompraService.salvar(i2_2);
 		i2_3 = notaCompraService.salvar(i2_3);
 
-		notaCompraService.listarNotaCompraItem().forEach( System.out::println );
+		List<NotaCompraItem> notaCompraItems = notaCompraService.listarNotaCompraItem();
+
+		notaCompraItems.forEach(i -> System.out.println(i));
 	}
 }

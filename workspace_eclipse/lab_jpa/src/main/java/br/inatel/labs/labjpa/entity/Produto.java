@@ -54,6 +54,14 @@ public class Produto
 		this.descricao = descricao;
 	}	
 
+	public List<Fornecedor> getListaFornecedor() {
+		return listaFornecedor;
+	}
+
+	public void setListaFornecedor(List<Fornecedor> listaFornecedor) {
+		this.listaFornecedor = listaFornecedor;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -69,5 +77,10 @@ public class Produto
 			return false;
 		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", descricao=" + descricao + "]";
 	}
 }

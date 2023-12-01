@@ -122,4 +122,10 @@ public class NotaCompraItem
 	{
 		return valorCompraProduto.multiply( BigDecimal.valueOf( quantidade ));
 	}
+
+		@Override
+	public String toString() {
+		return "NotaCompraItem [id=" + id + ", valorCompraProduto=" + valorCompraProduto + ", quantidade=" + quantidade
+				+ "]";
+	}
 }

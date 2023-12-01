@@ -2,6 +2,7 @@ package br.inatel.labs.labjpa;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,13 @@ public class LoadingDemo
 	{
 		try
 		{
-			NotaCompra nota = service.buscarNotaCompraPeloId( 1L );
-			List<NotaCompraItem> listaNotaCompraItem = nota.getListaNotaCompraItem();
-			int nroDeItens = nota.getListaNotaCompraItem().size();
-			System.out.println( nroDeItens );
+			Optional<NotaCompra> opNota = service.buscarNotaCompraPeloId(1L);
+			
+			if(opNota.isPresent()) {
+				NotaCompra nota = opNota.get();
+				int nItems = nota.getListaNotaCompraItem().size();
+				System.out.println(nItems);
+			}
 		}
 		catch (Exception e)
 		{
@@ -64,10 +68,12 @@ public class LoadingDemo
 	{
 		try 
 		{
-			NotaCompraItem item = service.buscarNotaCompraItemPeloId(1L);
-			LocalDate dataEmissao = item.getNotaCompra().getDataEmissao();
-			System.out.println(dataEmissao);
-			System.out.println("Aconteceu carregamento EAGER");
+			Optional<NotaCompraItem> opItem = service.buscarNotaCompraItemPeloId(1L);
+			if(opItem.isPresent()) {
+				NotaCompraItem item = opItem.get();
+				LocalDate dataEmissao = item.getNotaCompra().getDataEmissao();
+				System.out.println(dataEmissao);
+			}
 		} 
 		catch (Exception e)
 		{
